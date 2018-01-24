@@ -2,6 +2,7 @@ package artem.com.tz_osdchenko;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,12 +16,12 @@ import artem.com.tz_osdchenko.entity.ProjectData;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button                    mBtnPrevious;
-    private Button                    mBtnNext;
+    private Button                    mBtnPrevious, mBtnNext;
     private ViewPager                 mViewPager;
     private ViewPagerAdapter          mViewPagerAdapter;
     private Map<Integer, ProjectData> dataMap;
     private TabLayout                 mTabLayout;
+    private ActionBar                 mActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initMap();
+
+        mActionBar = getSupportActionBar();
+
+        if (mActionBar != null) {
+            mActionBar.setTitle("CURRENT_DATA");
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+            mActionBar.setElevation(0);
+        }
 
         mTabLayout = findViewById(R.id.tabs);
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.name_log));
@@ -117,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         mBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

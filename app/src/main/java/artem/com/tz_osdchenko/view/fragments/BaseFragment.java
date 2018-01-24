@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import artem.com.tz_osdchenko.MainActivity;
-
 
 /**
  * Created by artem on 24.01.2018.
@@ -46,7 +44,6 @@ public class BaseFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         readBundle(getArguments());
-        setActionBar(mText);
 
         setHasOptionsMenu(true);
 
@@ -70,19 +67,6 @@ public class BaseFragment extends ListFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    private void setActionBar(String text) {
-        mActionBar = ((MainActivity) getActivity()).getSupportActionBar();
-
-        if (mActionBar == null) {
-            return;
-        }
-
-        mActionBar.show();
-        mActionBar.setTitle(text);
-        mActionBar.setDisplayHomeAsUpEnabled(true);
-        mActionBar.setElevation(0);
     }
 
 }
