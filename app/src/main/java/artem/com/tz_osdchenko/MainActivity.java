@@ -13,6 +13,7 @@ import java.util.Map;
 
 import artem.com.tz_osdchenko.adapter.ViewPagerAdapter;
 import artem.com.tz_osdchenko.entity.ProjectData;
+import artem.com.tz_osdchenko.utils.Constants;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         mActionBar = getSupportActionBar();
 
         if (mActionBar != null) {
-            mActionBar.setTitle("CURRENT_DATA");
+            mActionBar.setTitle(Constants.CURRENT_DATE);
             mActionBar.setDisplayHomeAsUpEnabled(true);
             mActionBar.setElevation(0);
         }
