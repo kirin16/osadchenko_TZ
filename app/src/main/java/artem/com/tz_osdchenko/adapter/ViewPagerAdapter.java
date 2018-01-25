@@ -14,14 +14,14 @@ import artem.com.tz_osdchenko.view.fragments.ContainerFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private ContainerFragment         previousFragment, nextFragment;
     private Map<Integer, ProjectData> map;
+    private ContainerFragment         previousFragment, nextFragment;
 
     public ViewPagerAdapter(FragmentManager fm, Map<Integer, ProjectData> map) {
         super(fm);
-        this.map = map;
+        this.map         = map;
         previousFragment = new ContainerFragment();
-        nextFragment = new ContainerFragment();
+        nextFragment     = new ContainerFragment();
     }
 
     @Override

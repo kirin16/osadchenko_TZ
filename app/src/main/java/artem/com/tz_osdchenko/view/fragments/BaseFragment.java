@@ -28,7 +28,7 @@ public class BaseFragment extends ListFragment {
 
     private void readBundle(Bundle bundle) {
         if (bundle != null) {
-            mText     = bundle.getString("text");
+            mText = bundle.getString("text");
         }
     }
 
@@ -37,7 +37,8 @@ public class BaseFragment extends ListFragment {
                              Bundle savedInstanceState) {
         readBundle(getArguments());
 
-        String[] data = new String[]{mText, mText, mText, mText, mText, mText, mText, mText, mText};
+        String[] data = new String[]
+                {mText, mText, mText, mText, mText, mText, mText, mText, mText};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 inflater.getContext(), android.R.layout.simple_list_item_1,

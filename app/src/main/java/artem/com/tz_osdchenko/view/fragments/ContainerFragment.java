@@ -15,11 +15,10 @@ import artem.com.tz_osdchenko.R;
 
 public class ContainerFragment extends Fragment {
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.container, container, false);
+        View view = inflater.inflate(R.layout.fragment_container, container, false);
         setStartTab();
         return view;
     }

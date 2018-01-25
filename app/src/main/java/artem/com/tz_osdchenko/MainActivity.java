@@ -152,8 +152,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        this.mMenu = menu;
-        this.mMenu.add(getResources().getString(R.string.name_log));
+        mMenu = menu;
+        mMenu.add(getResources().getString(R.string.name_log));
         return super.onCreateOptionsMenu(menu);
     }
 
