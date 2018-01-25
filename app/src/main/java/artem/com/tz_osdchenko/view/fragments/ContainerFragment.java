@@ -24,17 +24,16 @@ public class ContainerFragment extends Fragment {
         return view;
     }
 
-    public void show(String text, String menuText) {
+    public void show(String text) {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        ft.replace(R.id.container, BaseFragment.newInstance(text, menuText));
+        ft.replace(R.id.container, BaseFragment.newInstance(text));
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }
 
     public void setStartTab() {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        ft.replace(R.id.container, BaseFragment.newInstance(getResources().getString(R.string.name_log),
-                getResources().getString(R.string.send)));
+        ft.replace(R.id.container, BaseFragment.newInstance(getResources().getString(R.string.name_log)));
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }

@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Map<Integer, ProjectData> dataMap;
     private TabLayout                 mTabLayout;
     private ActionBar                 mActionBar;
+    private Menu                      mMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,18 @@ public class MainActivity extends AppCompatActivity {
             mActionBar.setElevation(0);
         }
 
-        mTabLayout = findViewById(R.id.tabs);
+        mTabLayout         = findViewById(R.id.tabs);
+        mBtnPrevious       = findViewById(R.id.btnPrevious);
+        mBtnNext           = findViewById(R.id.btnNext);
+        mViewPager         = findViewById(R.id.mainPager);
+
+        mViewPagerAdapter  = new ViewPagerAdapter(getSupportFragmentManager(), dataMap);
+
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.name_log));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.name_general));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.name_docs));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.name_dvir));
+
         mTabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorPrimaryDark));
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -53,23 +62,27 @@ public class MainActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_log),
-                                        dataMap.get(mViewPager.getCurrentItem()).getSend());
+                                .show(getResources().getString(R.string.name_log)
+                                );
+                        setMenuItem(getResources().getString(R.string.send));
                         break;
                     case 1:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_general),
-                                        dataMap.get(mViewPager.getCurrentItem()).getAdd());
+                                .show(getResources().getString(R.string.name_general)
+                                );
+                        setMenuItem(getResources().getString(R.string.add));
                         break;
                     case 2:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_docs),
-                                        dataMap.get(mViewPager.getCurrentItem()).getDocs());
+                                .show(getResources().getString(R.string.name_docs)
+                                );
+                        setMenuItem(getResources().getString(R.string.load));
                         break;
                     case 3:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_dvir),
-                                        dataMap.get(mViewPager.getCurrentItem()).getDvir());
+                                .show(getResources().getString(R.string.name_dvir)
+                                );
+                        mMenu.clear();
                         break;
                     default:
                         break;
@@ -87,35 +100,33 @@ public class MainActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_log),
-                                        dataMap.get(mViewPager.getCurrentItem()).getSend());
+                                .show(getResources().getString(R.string.name_log)
+                                );
+                        setMenuItem(getResources().getString(R.string.send));
                         break;
                     case 1:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_general),
-                                        dataMap.get(mViewPager.getCurrentItem()).getAdd());
+                                .show(getResources().getString(R.string.name_general)
+                                );
+                        setMenuItem(getResources().getString(R.string.add));
                         break;
                     case 2:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_docs),
-                                        dataMap.get(mViewPager.getCurrentItem()).getDocs());
+                                .show(getResources().getString(R.string.name_docs)
+                                );
+                        setMenuItem(getResources().getString(R.string.load));
                         break;
                     case 3:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_dvir),
-                                        dataMap.get(mViewPager.getCurrentItem()).getDvir());
+                                .show(getResources().getString(R.string.name_dvir)
+                                );
+                        mMenu.clear();
                         break;
                     default:
                         break;
                 }
             }
         });
-
-        mBtnPrevious       = findViewById(R.id.btnPrevious);
-        mBtnNext           = findViewById(R.id.btnNext);
-
-        mViewPager         = findViewById(R.id.mainPager);
-        mViewPagerAdapter  = new ViewPagerAdapter(getSupportFragmentManager(), dataMap);
         
         mViewPager.setAdapter(mViewPagerAdapter);
 
@@ -139,11 +150,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        this.mMenu = menu;
+        this.mMenu.add(getResources().getString(R.string.name_log));
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private void setMenuItem(String menuTitle){
+        mMenu.clear();
+        mMenu.add(menuTitle);
+    }
+
     private void initMap(){
         dataMap = new HashMap<>();
         for (int i =0; i<2; i++) {
-            dataMap.put(i, new ProjectData(getResources().getString(R.string.send), getResources().getString(R.string.add),
-                    getResources().getString(R.string.load), getResources().getString(R.string.name_dvir)));
+            dataMap.put(i, new ProjectData(
+                    getResources().getString(R.string.send),
+                    getResources().getString(R.string.add) ,
+                    getResources().getString(R.string.load),
+                    getResources().getString(R.string.name_dvir))
+            );
         }
     }
 

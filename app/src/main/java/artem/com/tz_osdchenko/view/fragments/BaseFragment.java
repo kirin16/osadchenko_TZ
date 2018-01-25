@@ -2,11 +2,7 @@ package artem.com.tz_osdchenko.view.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -18,25 +14,21 @@ import android.widget.ArrayAdapter;
 
 public class BaseFragment extends ListFragment {
 
-    private String    mText, mMenuText;
-    private ActionBar mActionBar;
-    private MenuItem  menuItem;
+    private String mText;
 
-    public static BaseFragment newInstance(String text, String menuText){
-        BaseFragment questFragment = new BaseFragment();
+    public static BaseFragment newInstance(String text){
+        BaseFragment baseFragment = new BaseFragment();
 
         Bundle args = new Bundle();
         args.putString("text", text);
-        args.putString("menuText", menuText);
-        questFragment.setArguments(args);
+        baseFragment.setArguments(args);
 
-        return questFragment;
+        return baseFragment;
     }
 
     private void readBundle(Bundle bundle) {
         if (bundle != null) {
             mText     = bundle.getString("text");
-            mMenuText = bundle.getString("menuText");
         }
     }
 
@@ -44,8 +36,6 @@ public class BaseFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         readBundle(getArguments());
-
-        setHasOptionsMenu(true);
 
         String[] data = new String[]{mText, mText, mText, mText, mText, mText, mText, mText, mText};
 
@@ -58,15 +48,5 @@ public class BaseFragment extends ListFragment {
 
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menuItem = menu.add(mText);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 
 }
