@@ -15,10 +15,29 @@ import artem.com.tz_osdchenko.R;
 
 public class ContainerFragment extends Fragment {
 
+    private String mText;
+
+    public static ContainerFragment newInstance(String text){
+        ContainerFragment containerFragment = new ContainerFragment();
+
+        Bundle args = new Bundle();
+        args.putString("text", text);
+        containerFragment.setArguments(args);
+
+        return containerFragment;
+    }
+
+    private void readBundle(Bundle bundle) {
+        if (bundle != null) {
+            mText = bundle.getString("text");
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_container, container, false);
+        readBundle(getArguments());
         setStartTab();
         return view;
     }
@@ -32,7 +51,7 @@ public class ContainerFragment extends Fragment {
 
     public void setStartTab() {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        ft.replace(R.id.container, BaseFragment.newInstance(getResources().getString(R.string.name_log)));
+        ft.replace(R.id.container, BaseFragment.newInstance(mText));
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }

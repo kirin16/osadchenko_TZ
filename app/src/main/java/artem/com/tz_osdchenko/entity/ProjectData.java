@@ -6,32 +6,32 @@ package artem.com.tz_osdchenko.entity;
 
 public class ProjectData {
 
-    private String send;
-    private String add;
-    private String docs;
-    private String dvir;
+    private String nameLog;
+    private String nameGeneral;
+    private String nameDocs;
+    private String nameDvir;
 
-    public ProjectData(String log, String general, String docs, String dvir) {
-        this.send = log;
-        this.add = general;
-        this.docs = docs;
-        this.dvir = dvir;
+    public ProjectData(String log, String general, String nameDocs, String nameDvir) {
+        this.nameLog = log;
+        this.nameGeneral = general;
+        this.nameDocs = nameDocs;
+        this.nameDvir = nameDvir;
     }
 
-    public String getSend() {
-        return send;
+    public String getLog() {
+        return nameLog;
     }
 
-    public String getAdd() {
-        return add;
+    public String getGeneral() {
+        return nameGeneral;
     }
 
     public String getDocs() {
-        return docs;
+        return nameDocs;
     }
 
     public String getDvir() {
-        return dvir;
+        return nameDvir;
     }
 
 }

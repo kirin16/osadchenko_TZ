@@ -62,25 +62,25 @@ public class MainActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_log)
+                                .show(dataMap.get(mViewPager.getCurrentItem()).getLog()
                                 );
                         setMenuItem(getResources().getString(R.string.send));
                         break;
                     case 1:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_general)
+                                .show(dataMap.get(mViewPager.getCurrentItem()).getGeneral()
                                 );
                         setMenuItem(getResources().getString(R.string.add));
                         break;
                     case 2:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_docs)
+                                .show(dataMap.get(mViewPager.getCurrentItem()).getDocs()
                                 );
                         setMenuItem(getResources().getString(R.string.load));
                         break;
                     case 3:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_dvir)
+                                .show(dataMap.get(mViewPager.getCurrentItem()).getDvir()
                                 );
                         mMenu.clear();
                         break;
@@ -100,25 +100,25 @@ public class MainActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_log)
+                                .show(dataMap.get(mViewPager.getCurrentItem()).getLog()
                                 );
                         setMenuItem(getResources().getString(R.string.send));
                         break;
                     case 1:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_general)
+                                .show(dataMap.get(mViewPager.getCurrentItem()).getGeneral()
                                 );
                         setMenuItem(getResources().getString(R.string.add));
                         break;
                     case 2:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_docs)
+                                .show(dataMap.get(mViewPager.getCurrentItem()).getDocs()
                                 );
                         setMenuItem(getResources().getString(R.string.load));
                         break;
                     case 3:
                         mViewPagerAdapter.getItem(mViewPager.getCurrentItem())
-                                .show(getResources().getString(R.string.name_dvir)
+                                .show(dataMap.get(mViewPager.getCurrentItem()).getDvir()
                                 );
                         mMenu.clear();
                         break;
@@ -162,13 +162,14 @@ public class MainActivity extends AppCompatActivity {
         mMenu.add(menuTitle);
     }
 
+
     private void initMap(){
         dataMap = new HashMap<>();
-        for (int i =0; i<2; i++) {
+        for (int i =0; i < Constants.DATA_COUNT; i++) {
             dataMap.put(i, new ProjectData(
-                    getResources().getString(R.string.send),
-                    getResources().getString(R.string.add) ,
-                    getResources().getString(R.string.load),
+                    getResources().getString(R.string.name_log),
+                    getResources().getString(R.string.name_general) ,
+                    getResources().getString(R.string.name_docs),
                     getResources().getString(R.string.name_dvir))
             );
         }
