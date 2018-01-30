@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout                 mTabLayout;
     private ActionBar                 mActionBar;
     private Menu                      mMenu;
+    private TabLayout.Tab             mTabLog;
+    private ArrayList<String>         arrayDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         mActionBar = getSupportActionBar();
 
         if (mActionBar != null) {
-            mActionBar.setTitle(Constants.CURRENT_DATE);
+            mActionBar.setTitle(arrayDate.get(0));
             mActionBar.setDisplayHomeAsUpEnabled(true);
             mActionBar.setElevation(0);
         }
@@ -47,13 +50,33 @@ public class MainActivity extends AppCompatActivity {
         mViewPager         = findViewById(R.id.mainPager);
 
         mViewPagerAdapter  = new ViewPagerAdapter(getSupportFragmentManager(), dataMap);
+        mTabLog            = mTabLayout.newTab().setText(R.string.name_log);
 
-        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.name_log));
+        mTabLayout.addTab(mTabLog);
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.name_general));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.name_docs));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.name_dvir));
 
         mTabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorPrimaryDark));
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position > 0 || position < dataMap.size() - 1 ) {
+                    mTabLog.select();
+                    mActionBar.setTitle(arrayDate.get(position));
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -135,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (mViewPager.getCurrentItem() > 0 ) {
                     mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1, true);
+                    mActionBar.setTitle(arrayDate.get(mViewPager.getCurrentItem()));
+                    mTabLog.select();
                 }
             }
         });
@@ -142,12 +167,13 @@ public class MainActivity extends AppCompatActivity {
         mBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mViewPager.getCurrentItem() < dataMap.size() ) {
+                if (mViewPager.getCurrentItem() < dataMap.size() - 1 ) {
                     mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
+                    mActionBar.setTitle(arrayDate.get(mViewPager.getCurrentItem()));
+                    mTabLog.select();
                 }
             }
         });
-
     }
 
     @Override
@@ -164,7 +190,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initMap(){
-        dataMap = new HashMap<>();
+        dataMap   = new HashMap<>();
+        arrayDate = new ArrayList<>();
         for (int i =0; i < Constants.DATA_COUNT; i++) {
             dataMap.put(i, new ProjectData(
                     getResources().getString(R.string.name_log),
@@ -172,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
                     getResources().getString(R.string.name_docs),
                     getResources().getString(R.string.name_dvir))
             );
+            arrayDate.add((i+1)+ " day");
         }
     }
 
